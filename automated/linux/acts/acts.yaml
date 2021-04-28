@@ -1,0 +1,31 @@
+metadata:
+    name: acts
+    format: "Lava-Test Test Definition 1.0"
+    description: "acts application compatibility test suite for allscenarios."
+    maintainer:
+        - chase.qi@linaro.org
+    os:
+        - openembedded
+    devices:
+        - qemu
+
+    scope:
+        - functional
+
+params:
+    # Specify test case name.
+    CASE: "ActsMathApiTest"
+    # Specify url and token for file uploading.
+    URL: "https://archive.validation.linaro.org/artifacts/private/stevan.radakovic/"
+    TOKEN: ""
+
+run:
+    steps:
+        - cd automated/linux/acts
+        - ./acts.sh -c "${CASE}"
+        - |
+          RESULT_FILE="./output/${CASE}.xml"
+          if [ -f "${RESULT_FILE}" ]; then
+            ../../utils/upload-to-artifactorial.sh -a "${RESULT_FILE}" -u "${URL}" -t "${TOKEN}"
+          fi
+        - ../../utils/send-to-lava.sh ./output/result.txt
