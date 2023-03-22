@@ -51,6 +51,12 @@ case "${abi}" in
         make defconfig
         { time -p make -j"${NPROC}" Image; } 2>&1 | tee "${LOGFILE}"
         ;;
+    x86_64)
+        install_deps "ncurses-dev make gcc-arm-linux-gnueabi" "${SKIP_INSTALL}"
+        make distclean
+        make ARCH=arm defconfig
+        ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- time -p make all 2>&1 | tee "${LOGFILE}"
+        ;;
     *)
         error_msg "Unsupported architecture!"
         ;;
