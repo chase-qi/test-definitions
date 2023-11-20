@@ -708,3 +708,20 @@ skiplist:
       - all
     tests:
       - setsockopt06
+
+  - reason: >
+      It hangs randomly for AVH stress testing. Fail rate 1%.
+    url: https://bugs.linaro.org/show_bug.cgi?id=na
+    environments: production
+    boards:
+      - bcm2711-rpi-4-b
+      - qemu_arm64
+    branches:
+      - all
+    tests:
+      - writev03
+      - writev04
+      - inotify08
+      - inotify09
+      - fcntl24
+      - fcntl24_64
