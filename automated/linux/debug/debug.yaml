@@ -1,0 +1,21 @@
+metadata:
+  name: debug
+  format: "Lava-Test Test Definition 1.0"
+  description: "debug"
+  maintainer:
+    - chase.qi@linaro.org
+  os:
+    - ubuntu
+    - debian
+  scope:
+    - functional
+  devices:
+    - panda
+
+params:
+  USE_NC: "0"
+
+run:
+  steps:
+    - cat ./run.sh
+    - echo "${USE_NC}"
