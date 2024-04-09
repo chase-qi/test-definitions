@@ -70,6 +70,8 @@ params:
     SHARD_INDEX: 1
 run:
     steps:
+        # wait for the test start signal.
+        - sleep 120
         - cd ./automated/linux/ltp/
         - ./ltp.sh -T "${TST_CMDFILES}" -s "${SKIP_INSTALL}" -v "${LTP_VERSION}" -M "${TIMEOUT_MULTIPLIER}" -R "${ROOT_PASSWD}" -b "${BOARD}" -d "${LTP_TMPDIR}" -g "${BRANCH}" -e "${ENVIRONMENT}" -i "${LTP_INSTALL_PATH}" -S "${SKIPFILE}" -p "${TEST_DIR}" -u "${TEST_GIT_URL}" -t "${BUILD_FROM_TAR}" -n "${SHARD_NUMBER}" -c "${SHARD_INDEX}"
         - ../../utils/send-to-lava.sh ./output/result.txt
