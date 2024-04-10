@@ -17,5 +17,4 @@ params:
 
 run:
   steps:
-    - cat ./run.sh
-    - echo "${USE_NC}"
+    - lava-test-case cat-cpuinfo --shell cat /proc/cpuinfo
